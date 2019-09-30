@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Open Bike Computer</string>
+    <string name="action_settings">Settings</string>
+    <string name="cancel">Cancel</string>
+    <string name="btle_search">BTLE sensors search</string>
+    <string name="save">Save</string>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sensor_name">Name of the device</string>
+    <string name="sensor_mac">MAC Address</string>
+    <string name="sensor_wheel_size">Wheel size</string>
+    <string name="sensor_category">Sensor type</string>
+    <string-array name="units_array">
+        <item>mm</item>
+    </string-array>
+    <string-array name="sensor_types_array">
+        <item>Speed</item>
+    </string-array>
+</resources>
