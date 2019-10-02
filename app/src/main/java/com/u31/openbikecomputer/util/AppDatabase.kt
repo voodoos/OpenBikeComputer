@@ -1,4 +1,4 @@
-package com.u31.openbikecomputer
+package com.u31.openbikecomputer.util
 
 import android.content.Context
 import android.util.Log

@@ -2,12 +2,15 @@ package com.u31.openbikecomputer
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.u31.openbikecomputer.sensors.Sensor
-import kotlinx.coroutines.*
+import com.u31.openbikecomputer.util.AppDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class SensorsViewModel(app: Application): AndroidViewModel(app) {
     private fun d(text : String) { Log.d("SensorsViewModel", text) }

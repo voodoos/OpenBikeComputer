@@ -18,18 +18,24 @@ import com.u31.openbikecomputer.sensors.EditSensorDialogFragment
 import com.u31.openbikecomputer.sensors.FindBTLEDialogFragment
 import com.u31.openbikecomputer.sensors.KnownSensorsAdapter
 import com.u31.openbikecomputer.sensors.Sensor
-
 import kotlinx.android.synthetic.main.activity_sensors.*
 
 class SensorsActivity : FragmentActivity() {
+    private lateinit var model: SensorsViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewAdapter: KnownSensorsAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
-    private val data : MutableList<Sensor> = mutableListOf()
+    private val data : MutableList<Item> = mutableListOf()
 
     private val MY_PERMISSIONS_REQUEST_LOCATION = 200
 
     private fun d(mess : String) { Log.d("SensorsActivity", mess) }
+
+
+
+    /*************
+     * LIFECYCLE *
+     *************/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +49,7 @@ class SensorsActivity : FragmentActivity() {
          *********/
 
         // Use appropritate ViewModel to update list
-        val model = ViewModelProviders.of(this)[SensorsViewModel::class.java]
+        model = ViewModelProviders.of(this)[SensorsViewModel::class.java]
 
         /******
          * UI *
@@ -51,7 +57,7 @@ class SensorsActivity : FragmentActivity() {
 
         /* Recyclier, listing already known sensors */
         viewManager = LinearLayoutManager(this)
-        viewAdapter = KnownSensorsAdapter(data)
+        viewAdapter = KnownSensorsAdapter().also { it.submitList(data) }
 
         recyclerView = findViewById<RecyclerView>(R.id.sensors_recycler_view).apply {
             // use this setting to improve performance if you know that changes
@@ -73,19 +79,14 @@ class SensorsActivity : FragmentActivity() {
         model.getSensors().observe(this, Observer<List<Sensor>>{ sensors ->
             // update UI
             data.clear()
-            data.addAll(sensors)
+            data.addAll(sensors.map { Item(it) })
             recyclerView.adapter?.notifyDataSetChanged()
         })
 
         /* Bottom right button starts BT scan */
         val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
-        fab.setOnClickListener { view ->
-            FindBTLEDialogFragment(bluetoothAdapter/*, model::addSensor*/)
-            {
-                // Sensor selected, open Edit form
-                    sensor -> EditSensorDialogFragment(sensor, model::addSensor)
-                .show(supportFragmentManager, "EditSensorFragment")
-            }
+        fab.setOnClickListener {
+            FindBTLEDialogFragment(bluetoothAdapter, ::launchEditDialog)
                 .show(supportFragmentManager, "FindBTLEDialogFragment")
         }
 
@@ -99,20 +100,16 @@ class SensorsActivity : FragmentActivity() {
         if (ContextCompat.checkSelfPermission(this@SensorsActivity,
                 Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED) {
-            Log.d("SensorsActivity", "ACCESS_FINE_LOCATION location not granted")
+            d("ACCESS_FINE_LOCATION location not granted")
             // Permission is not granted
             ActivityCompat.requestPermissions(
                 this@SensorsActivity,
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 MY_PERMISSIONS_REQUEST_LOCATION)
-
-            // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-            // app-defined int constant. The callback method gets the
-            // result of the request.
         } else {
-            Log.d("SensorsActivity", "ACCESS_FINE_LOCATION location already granted")
+            d("ACCESS_FINE_LOCATION location already granted")
         }
-        Log.d("SensorsActivity", "test")
+        d("test")
         // end check permissions
 
     }
@@ -120,16 +117,16 @@ class SensorsActivity : FragmentActivity() {
     // todo move
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>, grantResults: IntArray) {
-        Log.d("SensorsActivity", "Request permission results")
+        d("Request permission results")
         when (requestCode) {
             MY_PERMISSIONS_REQUEST_LOCATION -> {
                 // If request is cancelled, the result arrays are empty.
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    Log.d("SensorsActivity", "Granted")
+                    d("Granted")
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
                 } else {
-                    Log.d("SensorsActivity", "Denied")
+                    d("Denied")
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }
@@ -157,6 +154,28 @@ class SensorsActivity : FragmentActivity() {
         return when(item.itemId) {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    /*************
+     * UTILITIES *
+     *************/
+    private fun launchEditDialog(sensor : Sensor) {
+        EditSensorDialogFragment(sensor, model::addSensor)
+            .show(supportFragmentManager, "EditSensorFragment")
+    }
+
+    /*****************************
+     * This inner class is used  *
+     * for the view databindings *
+     * It wraps a Sensor with    *
+     * other useful bindings     *
+     * such as callbacks         *
+     *****************************/
+    inner class Item(val sensor: Sensor) {
+         // Required for DataBinging to work
+        fun  onClickSensor() {
+            launchEditDialog(sensor)
         }
     }
 }
