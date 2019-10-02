@@ -7,6 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.u31.openbikecomputer.BR
 
 /* taken from https://proandroiddev.com/android-data-binding-listadapter-9e72ce50e8c7 */
 /* Provide a generic way to combine ListAdapter and DataBindings */
