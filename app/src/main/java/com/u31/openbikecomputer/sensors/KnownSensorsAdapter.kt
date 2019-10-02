@@ -1,9 +1,9 @@
 package com.u31.openbikecomputer.sensors
 
 import androidx.recyclerview.widget.DiffUtil
-import com.u31.openbikecomputer.DataBindingAdapter
 import com.u31.openbikecomputer.R
 import com.u31.openbikecomputer.SensorsActivity
+import com.u31.openbikecomputer.util.DataBindingAdapter
 
 class KnownSensorsAdapter : DataBindingAdapter<SensorsActivity.Item>(DiffCallback()) {
     class DiffCallback : DiffUtil.ItemCallback<SensorsActivity.Item>() {

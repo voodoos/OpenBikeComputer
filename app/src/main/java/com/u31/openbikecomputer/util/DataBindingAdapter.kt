@@ -1,4 +1,4 @@
-package com.u31.openbikecomputer
+package com.u31.openbikecomputer.util
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
