@@ -16,10 +16,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                // Save  Room DB schema for versionning
-                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+        vectorDrawables.useSupportLibrary = true
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas".toString())
+                arg("room.incremental", "true")
+                arg("room.expandProjection", "true")
             }
         }
     }

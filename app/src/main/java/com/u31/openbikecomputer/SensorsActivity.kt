@@ -174,8 +174,13 @@ class SensorsActivity : FragmentActivity() {
      *****************************/
     inner class Item(val sensor: Sensor) {
          // Required for DataBinging to work
-        fun  onClickSensor() {
+        fun  onClickEdit() {
             launchEditDialog(sensor)
+        }
+
+        fun  onClickDelete() {
+            //todo add warning ?
+            model.removeSensor(sensor)
         }
     }
 }

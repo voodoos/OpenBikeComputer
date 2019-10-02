@@ -44,13 +44,29 @@ class SensorsViewModel(app: Application): AndroidViewModel(app) {
         // Do an asynchronous operation to add and re-fetch sensors.
         viewModelScope.launch(Dispatchers.Main) {
             // Updating sensors list in UI thread
-            d("Adding new known sensor to db")
+            d("Adding (new) sensor to db")
             d(s.toString())
 
             sensors.value = async(Dispatchers.IO) {
                 // Adding and fetching data in a separate IO thread
                 val db = AppDatabase.get(getApplication())
                 db.sensorDao().insertAll(s)
+                return@async db.sensorDao().getAll()
+            }.await()
+        }
+    }
+
+    fun removeSensor(s: Sensor) {
+        // Do an asynchronous operation to add and re-fetch sensors.
+        viewModelScope.launch(Dispatchers.Main) {
+            // Updating sensors list in UI thread
+            d("Removing sensor from db")
+            d(s.toString())
+
+            sensors.value = async(Dispatchers.IO) {
+                // Adding and fetching data in a separate IO thread
+                val db = AppDatabase.get(getApplication())
+                db.sensorDao().delete(s)
                 return@async db.sensorDao().getAll()
             }.await()
         }
