@@ -1,6 +1,5 @@
 language: android
 jdk: oraclejdk8
-dist: trusty
 
 env:
  global:
@@ -14,11 +13,7 @@ script:
   - ./gradlew build check
 
 android:
-  licenses:
-    - 'android-sdk-preview-license-.+'
-    - 'android-sdk-license-.+'
-    - 'google-gdk-license-.+'
- components:
+  components:
     - tools
     - platform-tools
     # The BuildTools version used by your project
@@ -30,3 +25,7 @@ android:
     - extra-google-m2repository
     - extra-android-m2repository
     - addon-google_apis-google-$ANDROID_API_LEVEL
+  licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
