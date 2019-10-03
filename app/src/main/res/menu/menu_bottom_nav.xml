@@ -5,10 +5,11 @@
         android:title="@string/menu_run"
         android:icon="@drawable/ic_directions_bike_black_24dp" />
 
-    <item android:id="@+id/action_sensors"
+    <item android:id="@+id/sensors_fragment"
         android:title="@string/menu_sensors"
         android:icon="@drawable/ic_memory_black_24dp" />
 
+    <!-- todo settings should not be in bottom nav (according to material ui guidelines) -->
     <item android:id="@+id/action_settings"
         android:title="@string/menu_settings"
         android:icon="@drawable/ic_settings_black_24dp" />
