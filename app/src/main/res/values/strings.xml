@@ -4,5 +4,5 @@
     <string name="cancel">Cancel</string>
     <string name="btle_search">BTLE sensors search</string>
     <string name="save">Save</string>
-    <string name="menu_run">Run</string>
+    <string name="menu_run">Dashboard</string>
 </resources>

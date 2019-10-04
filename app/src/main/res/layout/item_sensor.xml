@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="item" type="com.u31.openbikecomputer.SensorsFragment.Item" />
+        <variable name="item" type="com.u31.openbikecomputer.sensors.SensorsFragment.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

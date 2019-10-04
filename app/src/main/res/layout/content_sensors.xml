@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/fragment_sensors"
-    tools:context=".SensorsFragment">
+    tools:context=".sensors.SensorsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/sensors_recycler_view"

@@ -1,4 +1,4 @@
-package com.u31.openbikecomputer
+package com.u31.openbikecomputer.sensors
 
 import android.app.Application
 import android.util.Log
@@ -6,7 +6,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.u31.openbikecomputer.sensors.Sensor
 import com.u31.openbikecomputer.util.AppDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

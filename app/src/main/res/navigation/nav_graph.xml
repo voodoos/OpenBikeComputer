@@ -6,7 +6,20 @@
     app:startDestination="@id/sensors_fragment">
     <fragment
         android:id="@+id/sensors_fragment"
-        android:name="com.u31.openbikecomputer.SensorsFragment"
+        android:name="com.u31.openbikecomputer.sensors.SensorsFragment"
         android:label="content_sensors"
-        tools:layout="@layout/content_sensors" />
+        tools:layout="@layout/content_sensors" >
+        <action
+            android:id="@+id/action_sensors_fragment_to_dashboard_fragment"
+            app:destination="@id/dashboard_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dashboard_fragment"
+        android:name="com.u31.openbikecomputer.dashboard.DashboardFragment"
+        android:label="dashboard_fragment"
+        tools:layout="@layout/dashboard_fragment" >
+        <action
+            android:id="@+id/action_dashboard_fragment_to_sensors_fragment"
+            app:destination="@id/sensors_fragment" />
+    </fragment>
 </navigation>

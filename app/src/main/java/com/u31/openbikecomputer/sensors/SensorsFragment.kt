@@ -1,4 +1,4 @@
-package com.u31.openbikecomputer
+package com.u31.openbikecomputer.sensors
 
 import android.bluetooth.BluetoothAdapter
 import android.os.Bundle
@@ -11,10 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.u31.openbikecomputer.sensors.EditSensorDialogFragment
-import com.u31.openbikecomputer.sensors.FindBTLEDialogFragment
-import com.u31.openbikecomputer.sensors.KnownSensorsAdapter
-import com.u31.openbikecomputer.sensors.Sensor
+import com.u31.openbikecomputer.R
 import kotlinx.android.synthetic.main.fragment_sensors.*
 
 class SensorsFragment : Fragment() {
